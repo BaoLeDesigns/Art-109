@@ -30,6 +30,41 @@ html {
  body {
      font-size: 1.6rem;
     /* font-size 1.6rem is now the same as 16px */
-    line-height: 1.6;
+    line-height: 2;
  }
+ 
+/*animation*/
+
+ @keyframes stretching {
+   0% {
+     width: 0%;
+     transform: scaleX(1);
+   }
+   100% {
+     width: 100%;
+     transform: scaleX(2) rotate(0.5turn);
+   }
+ }
+
+ @keyframes changebgcolor{
+   0% {
+      background-color: aqua;
+    }
+    50% {
+      background-color: orange;
+    }
+    100% {
+      background-color: red;
+    }
+ }
+ 
+ 
+ .button {
+   animation-name: stretching;
+   display: inline-block;  
+   background-color: aqua;
+   letter-spacing: 80px;
+   animation: stretching 5s linear infinite alternate, changebgcolor 5s linear infinite alternate
+}
+ 
  
