@@ -83,12 +83,36 @@ footer a:hover{
     height: 475px;
 }
 
+.resume-section {
+    margin-bottom: 50px;
+}
+
+.resume-section h2 {
+border-bottom: 2px dashed #AD6A6C;
+}
+
+.download-link{
+    position: fixed;
+    top: 5px;
+    left: 5px;
+}
+
 /* PROFILE 
 ------------------------------------------*/
 
 
 /* PROJECTS 
 ------------------------------------------*/
+.project-item{
+    display:flow-root;
+    margin: 30px 0;
+}
+
+.project-item img{
+    width: 300px;
+    float: left;
+    margin-right: 20px;
+}
 
 
 /* WORK EXPERIENCE 
