@@ -17,6 +17,7 @@ B0413E Redwood but more saturated
 */
 html {
     box-sizing: border-box;
+    font-size: 62.5%; /*set default to 10px*/
   }
   *, *:before, *:after {
     box-sizing: inherit;
@@ -29,8 +30,29 @@ html, body{
 body {
     background: #eeeaea;
     margin: 0;
+    
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.4;
 }
 
+h1, h2, h3 {
+    font-family: "Francois One", sans-serif;
+
+}
+
+h1 {
+    font-size: 4rem;
+    line-height: 0.9;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
 /*links */
 
 a{ 
@@ -53,6 +75,13 @@ footer a:hover{
     background: #f4e87c; 
     color: #B0413E; 
     text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: inline-block;
+    padding: 7px;
+    letter-spacing: .1em;
+    line-height: 1;
+    border-radius: 4px;
 }
 
 .content-wrapper{
@@ -101,6 +130,7 @@ border-bottom: 2px dashed #AD6A6C;
     position: fixed;
     top: 5px;
     left: 5px;
+    font-size: 1.5rem;
 }
 
 /* PROFILE 
@@ -127,11 +157,23 @@ border-bottom: 2px dashed #AD6A6C;
     display: grid;
     grid-template-columns: 350px 1fr;
     column-gap: 20px;
+    margin: 30px 0;
+}
+.work-details p {
+    margin: 0;
+}
+.work-summary p:first-child {
+    margin-top: 1;
 }
 
 /* EDUCATION 
 ------------------------------------------*/
-
+.education-item{
+    margin: 30px 0;
+}
+.education-item p {
+margin: 0;
+}
 
 /* FOOTER 
 ------------------------------------------*/
