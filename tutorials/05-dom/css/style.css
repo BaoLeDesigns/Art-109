@@ -1,0 +1,105 @@
+/*
+CSS RESETS:
+ Border box reset:
+https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ 62.5% Fix: https: //www.aleksandrhovhannisyan.com/blog/62-5-percent-font-size-trick/
+*/
+
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+ }
+ 
+ 
+ *,
+ *:before,
+ *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+ }
+ 
+ 
+ html,
+ body {
+    height: 100%;
+ }
+ 
+ 
+ body {
+     font-size: 1.6rem;
+    /* font-size 1.6rem is now the same as 16px */
+    line-height: 1.6;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: black;
+    color: white;
+ }
+ 
+
+ header{
+    padding: 50px;
+    background-color: rgb(172, 17, 17);
+    text-align: center;
+ }
+
+/* main{
+
+ }*/
+
+.image-div{
+    display: inline-block;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+#image-0{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    left: 20px;
+}
+
+#image-1{
+    position: absolute;
+    top: 450px;
+    right: 90px;
+    left: 80px;
+}
+
+#image-2{
+    position: absolute;
+    top: 250px;
+    right: 150px;
+    left: 200px;
+}
+
+#image-3{
+    position: fixed;
+    top: 2px;
+    right: 15px;
+    left: 400px;
+}
+
+#image-4{
+    position: absolute;
+    top: 600px;
+    right: 300px;
+    left: 200px;
+}
+
+#image-5{
+    position: absolute;
+    top: 600px;
+    right: 300px;
+    left: 200px;
+}
+
+#image-6{
+    position: absolute;
+    top: 80px;
+    right: 200px;
+    left: 290px;
+}
