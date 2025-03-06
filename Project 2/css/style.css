@@ -64,19 +64,27 @@ body {
     width: 300px;
     filter: brightness(0%);
     transition: filter 0.3s ease-in-out;
+    pointer-events: auto;
 }
 
 .hidden-image:hover {
     filter: brightness(100%);
 }
 
-/* images */
+/* image placement & size */
 .image-1 {
     top: 5%;
-    left: 20%
+    left: 20%;
 }
 
 .image-2 {
+    top: 70%;
+    left: 30%;
+    width: 250px;
+    height: 350px;
+}
+
+.image-3 {
     top: 50%;
-    left: 60%
+    left: 60%;
 }
