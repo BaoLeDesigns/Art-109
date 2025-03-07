@@ -10,20 +10,30 @@ document.addEventListener("mousemove", function (event) {
 
 window.onload = function() {
     if (!sessionStorage.getItem("alertShown")) {
-        alert("hi");
+        alert("Welcome to the forever darkness, look around until you find me, in a wall where it rhymes with free");
         sessionStorage.setItem("alertShown", "true");
-}}
+    }
 
-document.querySelector(".image-1").addEventListener("click", function() {  
-    alert("You see my gaze, but not my true form, look into a mirror first before I will speak to you fully."); 
-});
+    const image1 = document.querySelector(".image-1");
+    const image2 = document.querySelector(".image-2");
+    const image3 = document.querySelector(".image-3");
 
-document.querySelector(".image-2").addEventListener("click", function() {  
-    alert("now you can find my true face, but you must find where I am."); 
-    document.querySelector(".image-1").style.display = "none";
-});
+    if (image1) {
+        image1.addEventListener("click", function() {
+            alert("You have found me, but I won't talk to you fully until you can truly see me, find a mirror and look into it, its located where you came from"); 
+        });
+    }
 
-document.querySelector(".image-3").addEventListener("click", function() {  
-    alert("test test"); 
-});
+    if (image2) {
+        image2.addEventListener("click", function() {
+            alert("Now you can find my true face, but I have moved to another wall, the one between the two clues you have found."); 
+            image1.style.display = "none"; 
+        });
+    }
 
+    if (image3) {
+        image3.addEventListener("click", function() {
+            alert("test test"); 
+        });
+    }
+};
