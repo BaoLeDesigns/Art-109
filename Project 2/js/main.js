@@ -1,4 +1,4 @@
-//Flashlight 
+//Flashlight cursor
 
 const flashlight = document.querySelector(".flashlight");
 
@@ -12,7 +12,7 @@ document.addEventListener("mousemove", function (event) {
 
 window.onload = function () {
     if (!sessionStorage.getItem("alertShown")) {
-        alert("Welcome to the forever darkness, look around until you find me, in a wall where it rhymes with free");
+        alert("Welcome to the forever darkness, look around until you find me, in a wall where it rhymes with free. DO NOT TOUCH ANYTHING ELSE BEFORE YOU FIND ME.");
         sessionStorage.setItem("alertShown", "true");
     }
 
@@ -32,7 +32,6 @@ window.onload = function () {
     if (image2) {
         image2.addEventListener("click", function () {
             alert("Now you can find my true face, but I have moved to another wall, the one between the two clues you have found.");
-            image1.style.display = "none";
         });
     }
 
@@ -50,13 +49,13 @@ window.onload = function () {
 
     if (image5) {
         image5.addEventListener("click", function () {
-            alert("I run my fingers over the strange symbols. I trace the patterns, piecing them together and it says: Two paths. One will take me out. The other will make sure I never leave. All in which is in wall 4 ");
+            alert("I decided to go with the door leading up, hopefully it leads me out of here.");
         });
     }
 
     if (image6) {
         image6.addEventListener("click", function () {
-            alert("I run my fingers over the strange symbols. I trace the patterns, piecing them together and it says: Two paths. One will take me out. The other will make sure I never leave. All in which is in wall 4 ");
+            alert("The door looks onminous, but sometimes risks are required to survive, lets hope I'm right.");
         });
     }
 };
