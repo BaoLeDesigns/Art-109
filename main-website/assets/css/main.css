@@ -2038,6 +2038,14 @@ input, select, textarea {
 
 		}
 
+/* Logo */
+
+.logo {
+    height: 60px;  
+    margin-right: 10px; 
+    vertical-align: middle; 
+}
+
 /* Footer */
 
 	#footer .copyright {
