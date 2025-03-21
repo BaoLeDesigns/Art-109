@@ -1,0 +1,362 @@
+/*
+Color Palette
+
+CFCCD6 French Gray
+343633 Black Olive
+F4E87C Straw
+AD6A6C Redwood
+B0413E Redwood but more saturated
+
+*/
+
+/* GLOBAL STYLES
+-------------------------------------*/
+
+/* 
+  https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+*/
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; /*set default to 10px*/
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+html, body{
+   height: 100%;
+}
+
+body {
+    background: #eeeaea;
+    margin: 0;
+    
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.4;
+}
+
+
+/* Basic styles for the navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #3f3f3f;
+    /* Green background */
+    color: #a3a3a3;
+}
+
+/* Logo styling */
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+/* Navigation links styling */
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s, text-decoration 0.3s, background-color 0.3s;
+    padding: 5px 10px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #e0e0e0;
+    /* Lighter color for active/hover */
+    background-color: #555555;
+    /* Darker green background on hover */
+    border-radius: 4px;
+    /* Optional: rounded corners */
+}
+
+/* Menu toggle button for mobile view */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    background-color: #fff;
+    height: 3px;
+    width: 25px;
+    margin: 5px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #28a745;
+        /* Green background for mobile view */
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+}
+
+
+
+h1, h2, h3 {
+    font-family: "Francois One", sans-serif;
+
+}
+
+h1 {
+    font-size: 4rem;
+    line-height: 0.9;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+/*links */
+
+a{ 
+    color:#f4e87c; 
+}
+
+a:hover {
+    color:rgb(219, 152, 64);
+}
+
+footer a{
+    color:#f4e87c;
+}
+
+footer a:hover{
+    color:rgb(219, 152, 64) 
+}
+
+.btn {
+    background: #f4e87c; 
+    color: #B0413E; 
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: inline-block;
+    padding: 7px;
+    letter-spacing: .1em;
+    line-height: 1;
+    border-radius: 4px;
+}
+
+.content-wrapper{
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 900px;
+
+}
+
+/* HOME
+-----------------------------------------*/
+.home {
+    background: url(../images/whitebg.jpeg) no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+.home .content-wrapper {
+    flex: 1 0 auto;
+}
+.content-bg {
+    background: rgb(255 255 255 / 0.9);
+    padding: 30px;
+}
+@media screen and (max-width: 350px) {
+    .home .content-wrapper {
+       padding: 10px;
+    }
+    .content-bg {
+        padding: 20px;
+    }
+}
+
+/* RESUME 
+------------------------------------------*/
+
+.resume header::before{
+    background: url(../images/resumeimg.png) center / cover;
+    background-size: cover;
+    content: "";
+    display: block;
+    height: 475px;
+}
+
+.resume-section {
+    margin-bottom: 50px;
+}
+
+.resume-section h2 {
+border-bottom: 2px dashed #AD6A6C;
+}
+
+.download-link{
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .download-link {
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .resume header::before {
+        height: 250px;
+    }
+    h1 {
+        font-size: 3.5rem;
+    }
+    h2{
+        font-size: 2.5rem;
+    }
+}
+/* PROFILE 
+------------------------------------------*/
+
+
+/* PROJECTS 
+------------------------------------------*/
+.project-item{
+    margin: 30px 0;
+}
+
+.project-item img{
+    width: 300px;
+}
+
+@media screen and (min-width: 850px) {
+    .project-item{
+        display:flow-root;
+    }
+    .project-item img{
+
+        float: left;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (min-width: 560px) and (max-width: 849px) {
+    .project-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+    }
+    .project-item img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .project-item img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* WORK EXPERIENCE 
+------------------------------------------*/
+.work-item{
+    margin: 30px 0;
+}
+.work-details p {
+    margin: 0;
+}
+
+@media screen and (min-width: 600px) {
+    .work-item {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        column-gap: 20px;
+    }
+    .work-summary p:first-child {
+        margin-top: 1;
+    }
+}
+
+/* EDUCATION 
+------------------------------------------*/
+.education-item{
+    margin: 30px 0;
+}
+.education-item p {
+margin: 0;
+}
+
+/* FOOTER 
+------------------------------------------*/
+footer{
+    background:#222;
+    color: #b3b3b3;
+
+}
+
+.socials{
+    list-style-type: none;
+    padding: 0;
+}
+
+.socials li{
+    display: inline-block;
+    margin-left: 32px;
+}
+
+.socials img{
+    width: 32px;
+}
+
+.socials img:hover{
+    opacity: 0.5;
+}
+
+@media screen and (min-width: 550px) {
+    footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px ;
+    }
+}
+
+@media screen and (max-width: 549px) {
+    footer{
+        text-align: center;
+        padding: 10px;
+    }
+}
