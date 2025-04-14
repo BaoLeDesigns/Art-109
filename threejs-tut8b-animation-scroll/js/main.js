@@ -22,11 +22,12 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.162.0/examples/jsm/loaders
 // ~~~~~~~~~~~~~~~~ Declare Global Variables~~~~~~~~~~~~~~~~
 let scene, camera, renderer, ball, dog, mixer;
 
-let actionPant, actionTail;
-
 
 // ~~~~~~~~~~~~~~~~ Initialize Scene in init() ~~~~~~~~~~~~~~~~
+
 function init() {
+
+    
 
     // ~~~~~~Set up scene, camera, + renderer ~~~~~~
 
@@ -35,9 +36,9 @@ scene.background = new THREE.Color(0x0250281)
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer = new THREE.WebGLRenderer({ antialias: true, canvas: document.querySelector('#bg')});
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    //document.body.appendChild(renderer.domElement);
 
 
     // ~~~~~~ Add Lights ~~~~~~
@@ -93,26 +94,21 @@ scene.background = new THREE.Color(0x0250281)
 
     // load dog model
 
+
     loader.load('assets/dog_shiny.gltf', function (gltf) {
         dog = gltf.scene;
         scene.add(dog);
         dog.scale.set(2, 2, 2); // scale your model
         dog.position.y = -2; // set initial position
-
         mixer = new THREE.AnimationMixer(dog);
         const clips = gltf.animations;
-
-        const clipPant = THREE.AnimationClip.findByName(clips, 'pant')
-        actionPant = mixer.clipAction(clipPant);
-        //actionPant.play();
-
-        const clipTail = THREE.AnimationClip.findByName(clips, 'tail')
-        actionTail = mixer.clipAction(clipTail);
-        actionTail.play();
-        //clips.forEach(function(clip){
-            //const action = mixer.clipAction(clip);
-            //action.play();
-       // });
+        //const clip = THREE.AnimationClip.findByName(clips, 'tail')
+        //const action = mixer.clipAction(clip);
+        //action.play();
+        clips.forEach(function(clip){
+            const action = mixer.clipAction(clip);
+            action.play();
+        });
     });
 
 
@@ -124,30 +120,6 @@ scene.background = new THREE.Color(0x0250281)
 
 }
 
-// Event Listeners
-
-let mouseIsDown = false;
-
-document.querySelector("body").addEventListener("mousedown", () =>{
-    actionPant.play();
-    actionPant.paused = false;
-    mouseIsDown = true;
-    console.log("mousedown");
-} )
-
-document.querySelector("body").addEventListener("mouseup", () =>{
-    //actionPant.stop();
-    mouseIsDown = false;
-    actionPant.paused = true;
-    console.log("mouseup");
-} )
-
-document.querySelector("body").addEventListener("mousemove", () =>{
-    if(mouseIsDown == true) {
-        console.log("mousemove");
-        ball.rotation.x += 20;
-    }
-} )
 
 
 
@@ -191,6 +163,18 @@ function onWindowResize() {
 
 window.addEventListener('resize', onWindowResize, false);
 
+function moveCamera(){
+    const t = document.body.getBoundingClientRect().top;
+
+    camera.position.z = 10 + t * 0.002;
+    camera.position.x = t * .001;
+}
+
+
+
 init(); // execute initialize function
+moveCamera();
 animate(); // execute animation function
+document.body.onscroll = moveCamera;
+
 
