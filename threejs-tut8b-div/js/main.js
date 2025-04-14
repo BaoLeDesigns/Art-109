@@ -12,14 +12,16 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 // ~~~~~~~~~~~~~~~~Set up~~~~~~~~~~~~~~~~
 let scene, camera, renderer, cube, sphere;
+let sceneContainer = document.querySelector("#scene-container");
+
 
 function init() {
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(75, sceneContainer.clientWidth / sceneContainer.clientHeight, 0.1, 1000);
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    renderer.setSize(sceneContainer.clientWidth, sceneContainer.clientHeight);
+    sceneContainer.appendChild(renderer.domElement);
 
     //light 
 
@@ -54,9 +56,9 @@ scene.add(directionalLight);
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = sceneContainer.clientWidth / sceneContainer.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(sceneContainer.clientWidth, sceneContainer.clientHeight);
 }
 
 window.addEventListener('resize', onWindowResize, false);
