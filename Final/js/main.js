@@ -4,6 +4,7 @@ let scene, camera, renderer, controls;
 let keysPressed = {};
 let clock = new THREE.Clock();
 let moveSpeed = 5;
+const collidableBoxes = [];
 
 init();
 animate();
@@ -14,7 +15,7 @@ function init() {
     scene.background = new THREE.Color(0x222222);
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 1.6, 5); 
+    camera.position.set(0, 1.6, 5);
 
     // Renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -25,7 +26,7 @@ function init() {
     controls = new PointerLockControls(camera, document.body);
     scene.add(controls.getObject());
 
-  
+
     document.body.addEventListener('click', () => {
         controls.lock();
     });
@@ -45,7 +46,7 @@ function init() {
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // placeholders
+    // placeholders with collision 
     const boxGeo = new THREE.BoxGeometry(1, 1, 1);
     const boxMat = new THREE.MeshStandardMaterial({ color: 0x66ccff });
 
@@ -53,8 +54,11 @@ function init() {
         const box = new THREE.Mesh(boxGeo, boxMat);
         box.position.set((Math.random() - 0.5) * 30, 0.5, (Math.random() - 0.5) * 30);
         scene.add(box);
-    }
+        box.updateMatrixWorld();
 
+        const boxBB = new THREE.Box3().setFromObject(box);
+        collidableBoxes.push({ mesh: box, boundingBox: boxBB });
+    }
     // Input
     window.addEventListener('keydown', e => keysPressed[e.key.toLowerCase()] = true);
     window.addEventListener('keyup', e => keysPressed[e.key.toLowerCase()] = false);
@@ -71,11 +75,9 @@ function handleMovement(delta) {
     const forward = new THREE.Vector3();
     const right = new THREE.Vector3();
 
-
     camera.getWorldDirection(forward);
     forward.y = 0;
     forward.normalize();
-
 
     right.crossVectors(forward, camera.up).normalize();
 
@@ -89,10 +91,30 @@ function handleMovement(delta) {
     moveVec.normalize();
     moveVec.multiplyScalar(moveSpeed * delta);
 
-    controls.getObject().position.add(moveVec);
+    const player = controls.getObject();
+    const newPosition = player.position.clone().add(moveVec);
 
-   
-    controls.getObject().position.y = 1.6;
+    const playerBB = new THREE.Box3(
+        new THREE.Vector3(newPosition.x - 0.3, newPosition.y - 1.6, newPosition.z - 0.3),
+        new THREE.Vector3(newPosition.x + 0.3, newPosition.y, newPosition.z + 0.3)
+    );
+
+    //collison movement dectect
+    let collision = false;
+
+    for (const box of collidableBoxes) {
+        box.boundingBox.setFromObject(box.mesh);
+        if (playerBB.intersectsBox(box.boundingBox)) {
+            collision = true;
+            break;
+        }
+    }
+
+    if (!collision) {
+        player.position.copy(newPosition);
+    }
+
+    player.position.y = 1.6;
 }
 
 function animate() {
