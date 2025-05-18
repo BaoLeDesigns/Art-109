@@ -5,6 +5,7 @@ let keysPressed = {};
 let clock = new THREE.Clock();
 let moveSpeed = 5;
 const collidableBoxes = [];
+import { GLTFLoader } from 'https://unpkg.com/three@0.162.0/examples/jsm/loaders/GLTFLoader.js';
 
 init();
 animate();
@@ -12,7 +13,7 @@ animate();
 function init() {
     // Scene & Camera
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x222222);
+    scene.background = new THREE.Color('rgba(177, 0, 0, 0.79)');
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 1.6, 5);
@@ -40,25 +41,85 @@ function init() {
 
     // Ground
     const groundGeo = new THREE.PlaneGeometry(100, 100);
-    const groundMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
+    const groundMat = new THREE.MeshStandardMaterial({
+        color: 'rgb(230, 230, 230)',
+        metalness: 1.0,
+        roughness: 0.8
+    });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // placeholders with collision 
-    const boxGeo = new THREE.BoxGeometry(1, 1, 1);
-    const boxMat = new THREE.MeshStandardMaterial({ color: 0x66ccff });
+    // // placeholders with collision 
+    // const boxGeo = new THREE.BoxGeometry(1, 1, 1);
+    // const boxMat = new THREE.MeshStandardMaterial({ color: 0x66ccff });
 
-    for (let i = 0; i < 10; i++) {
-        const box = new THREE.Mesh(boxGeo, boxMat);
-        box.position.set((Math.random() - 0.5) * 30, 0.5, (Math.random() - 0.5) * 30);
-        scene.add(box);
-        box.updateMatrixWorld();
+    // for (let i = 0; i < 10; i++) {
+    //     const box = new THREE.Mesh(boxGeo, boxMat);
+    //     box.position.set((Math.random() - 0.5) * 30, 0.5, (Math.random() - 0.5) * 30);
+    //     scene.add(box);
+    //     box.updateMatrixWorld();
 
-        const boxBB = new THREE.Box3().setFromObject(box);
-        collidableBoxes.push({ mesh: box, boundingBox: boxBB });
-    }
+    //     const boxBB = new THREE.Box3().setFromObject(box);
+    //     collidableBoxes.push({ mesh: box, boundingBox: boxBB });
+    // }
+
+    // // placeholders in grid layout test
+    // const boxGeo = new THREE.BoxGeometry(1, 1, 1);
+    // const boxMat = new THREE.MeshStandardMaterial({ color: 0x66ccff });
+
+    // const rows = 5;     
+    // const cols = 5;       
+    // const spacing = 4;     
+
+    // for (let z = 0; z < rows; z++) {
+    //     for (let x = 0; x < cols; x++) {
+    //         const box = new THREE.Mesh(boxGeo, boxMat);
+    //         box.position.set(
+    //             (x - cols / 2) * spacing,
+    //             0.5,
+    //             (z - rows / 2) * spacing
+    //         );
+    //         scene.add(box);
+    //         box.updateMatrixWorld();
+
+    //         const boxBB = new THREE.Box3().setFromObject(box);
+    //         collidableBoxes.push({ mesh: box, boundingBox: boxBB });
+    //     }
+    // }
+
+    //server model in grid layout + collision boxes
+    const loader = new GLTFLoader();
+    loader.load('assets/server.glb', (gltf) => {
+        const model = gltf.scene;
+
+        const rows = 39;
+        const cols = 40;
+        const spacing = 2.5;
+
+        for (let z = 0; z < rows; z++) {
+            for (let x = 0; x < cols; x++) {
+                if (x % 2 === 0) {
+                    const clone = model.clone(true);
+                    clone.position.set(
+                        (x - cols / 2) * spacing,
+                        0,
+                        (z - rows / 2) * spacing
+                    );
+                    scene.add(clone);
+                    clone.updateMatrixWorld(true);
+
+
+                    //collision box
+                    const boxBB = new THREE.Box3().setFromObject(clone);
+                    collidableBoxes.push({ mesh: clone, boundingBox: boxBB });
+                }
+            }
+        }
+    });
+
+
     // Input
     window.addEventListener('keydown', e => keysPressed[e.key.toLowerCase()] = true);
     window.addEventListener('keyup', e => keysPressed[e.key.toLowerCase()] = false);
