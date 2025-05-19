@@ -13,7 +13,7 @@ animate();
 function init() {
     // Scene & Camera
     scene = new THREE.Scene();
-    scene.background = new THREE.Color('rgba(177, 0, 0, 0.79)');
+    scene.background = new THREE.Color('rgb(112, 0, 0)');
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 1.6, 5);
@@ -21,6 +21,7 @@ function init() {
     // Renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
     document.body.appendChild(renderer.domElement);
 
     // Pointer Lock Controls
@@ -33,10 +34,21 @@ function init() {
     });
 
     // Lighting
-    scene.add(new THREE.AmbientLight(0xffffff, 1));
+    scene.add(new THREE.AmbientLight('rgb(255, 255, 255)', 0.2));
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(5, 10, 5);
+    const dirLight = new THREE.DirectionalLight('rgb(255, 181, 181)', 0.8);
+    dirLight.position.set(10, 20, 10);
+    dirLight.castShadow = true;
+
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.camera.near = 1;
+    dirLight.shadow.camera.far = 100;
+    dirLight.shadow.camera.left = -50;
+    dirLight.shadow.camera.right = 50;
+    dirLight.shadow.camera.top = 50;
+    dirLight.shadow.camera.bottom = -50;
+
     scene.add(dirLight);
 
     // Ground
@@ -94,8 +106,8 @@ function init() {
     loader.load('assets/server.glb', (gltf) => {
         const model = gltf.scene;
 
-        const rows = 39;
-        const cols = 40;
+        const rows = 35;
+        const cols = 33;
         const spacing = 2.5;
 
         for (let z = 0; z < rows; z++) {
@@ -110,6 +122,13 @@ function init() {
                     scene.add(clone);
                     clone.updateMatrixWorld(true);
 
+                    //shadows for servers
+                    clone.traverse(child => {
+                        if (child.isMesh) {
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                        }
+                    });
 
                     //collision box
                     const boxBB = new THREE.Box3().setFromObject(clone);
