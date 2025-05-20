@@ -34,15 +34,15 @@ function init() {
     });
 
     //audio
-document.getElementById('playBtn').addEventListener('click', () => {
-    const bgMusic = document.getElementById('bgMusic');
-    bgMusic.volume = 0.5;
+    document.getElementById('playBtn').addEventListener('click', () => {
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.5;
 
-    bgMusic.play().then(() => {
-        document.getElementById('playBtn').style.display = 'none';
-    }).catch(() => {
+        bgMusic.play().then(() => {
+            document.getElementById('playBtn').style.display = 'none';
+        }).catch(() => {
+        });
     });
-});
 
 
     // Lighting
@@ -202,7 +202,7 @@ function handleMovement(delta) {
         newPosition.z > minZ + 0.3 && newPosition.z < maxZ - 0.3
     );
 
-     //collison movement dectect
+    //collison movement dectect
     let collision = false;
 
     for (const box of collidableBoxes) {

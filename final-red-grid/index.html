@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art 109 Final</title>
-    <link rel="stylesheet" href="css/style.css">
 
-    <!-- use an import map to link to the Three.js CDN -->
-    <script type="importmap">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art 109 Final</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- use an import map to link to the Three.js CDN -->
+  <script type="importmap">
       {
         "imports": {
           "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
@@ -16,22 +17,26 @@
       }
     </script>
 
-    <!-- Link to your Javascript file as a type="module", this will execute the file after the HTML is loaded -->
-    <script type="module" src="js/main.js"></script>
-    
+  <!-- Link to your Javascript file as a type="module", this will execute the file after the HTML is loaded -->
+  <script type="module" src="js/main.js"></script>
+
 </head>
 
 
 <body>
- <header>
+  <header>
     <h1>Red Grid</h1>
     <p>A dystopian reflection on the environmental and existential consequences of AI.</p>
-    <p>Server rack model by <a href="https://sketchfab.com/3d-models/lowpoly-server-rack-7ff9f3ba60a34355ad09246787c780e3" target="_blank">Josyug on Sketchfab</a>.</p>
-    <p>Audio by <a href="https://freesound.org/people/Nihil_Existentia/sounds/514950/" target="_blank">Nihil_Existentia on freesound</a>.</p>
-</header>
-    
-    <button id="playBtn">Play Ambient Sound</button>
-<audio id="bgMusic" src="audio/ambientsound.wav" loop></audio>
+    <p>Server rack model by <a
+        href="https://sketchfab.com/3d-models/lowpoly-server-rack-7ff9f3ba60a34355ad09246787c780e3"
+        target="_blank">Josyug on Sketchfab</a>.</p>
+    <p>Audio by <a href="https://freesound.org/people/Nihil_Existentia/sounds/514950/" target="_blank">Nihil_Existentia
+        on freesound</a>.</p>
+  </header>
+
+  <button id="playBtn">Play Ambient Sound</button>
+  <audio id="bgMusic" src="audio/ambientsound.wav" loop></audio>
 
 </body>
+
 </html>
