@@ -39,7 +39,7 @@ document.body.addEventListener('click', () => {
 
     const bgMusic = document.getElementById('bgMusic');
     if (bgMusic && bgMusic.paused) {
-        bgMusic.volume = 0.5; // Optional: adjust volume
+        bgMusic.volume = 0.5; 
         bgMusic.play();
     }
 });
