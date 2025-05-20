@@ -46,19 +46,19 @@ document.getElementById('playBtn').addEventListener('click', () => {
 
 
     // Lighting
-    scene.add(new THREE.AmbientLight('rgb(255, 255, 255)', 0.2));
+    scene.add(new THREE.AmbientLight('rgb(255, 168, 168)', 0.2));
 
-    const dirLight = new THREE.DirectionalLight('rgb(255, 181, 181)', 0.8);
+    const dirLight = new THREE.DirectionalLight('rgb(255, 156, 156)', 0.8);
     dirLight.position.set(10, 20, 10);
     dirLight.castShadow = true;
 
     dirLight.shadow.mapSize.width = 2048;
     dirLight.shadow.mapSize.height = 2048;
     dirLight.shadow.camera.near = 1;
-    dirLight.shadow.camera.far = 100;
-    dirLight.shadow.camera.left = -60;
+    dirLight.shadow.camera.far = 150;
+    dirLight.shadow.camera.left = -80;
     dirLight.shadow.camera.right = 60;
-    dirLight.shadow.camera.top = 60;
+    dirLight.shadow.camera.top = 80;
     dirLight.shadow.camera.bottom = -60;
 
     scene.add(dirLight);
@@ -66,7 +66,7 @@ document.getElementById('playBtn').addEventListener('click', () => {
     // Ground
     const groundGeo = new THREE.PlaneGeometry(100, 100);
     const groundMat = new THREE.MeshStandardMaterial({
-        color: 'rgb(230, 230, 230)',
+        color: 'rgb(109, 109, 109)',
         metalness: 1.0,
         roughness: 0.8
     });
@@ -118,8 +118,8 @@ document.getElementById('playBtn').addEventListener('click', () => {
     loader.load('assets/server.glb', (gltf) => {
         const model = gltf.scene;
 
-        const rows = 35;
-        const cols = 33;
+        const rows = 39;
+        const cols = 40;
         const spacing = 2.5;
 
         for (let z = 0; z < rows; z++) {
