@@ -33,6 +33,18 @@ function init() {
         controls.lock();
     });
 
+//auto play audio
+document.body.addEventListener('click', () => {
+    controls.lock();
+
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic && bgMusic.paused) {
+        bgMusic.volume = 0.5; // Optional: adjust volume
+        bgMusic.play();
+    }
+});
+
+
     // Lighting
     scene.add(new THREE.AmbientLight('rgb(255, 255, 255)', 0.2));
 
@@ -44,10 +56,10 @@ function init() {
     dirLight.shadow.mapSize.height = 2048;
     dirLight.shadow.camera.near = 1;
     dirLight.shadow.camera.far = 100;
-    dirLight.shadow.camera.left = -50;
-    dirLight.shadow.camera.right = 50;
-    dirLight.shadow.camera.top = 50;
-    dirLight.shadow.camera.bottom = -50;
+    dirLight.shadow.camera.left = -60;
+    dirLight.shadow.camera.right = 60;
+    dirLight.shadow.camera.top = 60;
+    dirLight.shadow.camera.bottom = -60;
 
     scene.add(dirLight);
 
@@ -179,7 +191,18 @@ function handleMovement(delta) {
         new THREE.Vector3(newPosition.x + 0.3, newPosition.y, newPosition.z + 0.3)
     );
 
-    //collison movement dectect
+    //boundary 
+    const minX = -50;
+    const maxX = 50;
+    const minZ = -50;
+    const maxZ = 50;
+
+    const withinBounds = (
+        newPosition.x > minX + 0.3 && newPosition.x < maxX - 0.3 &&
+        newPosition.z > minZ + 0.3 && newPosition.z < maxZ - 0.3
+    );
+
+     //collison movement dectect
     let collision = false;
 
     for (const box of collidableBoxes) {
@@ -190,7 +213,7 @@ function handleMovement(delta) {
         }
     }
 
-    if (!collision) {
+    if (!collision && withinBounds) {
         player.position.copy(newPosition);
     }
 
